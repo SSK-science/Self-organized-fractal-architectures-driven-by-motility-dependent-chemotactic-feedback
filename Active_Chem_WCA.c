@@ -17,7 +17,7 @@ void Chemical_directions(double C_dirx[6],double C_diry[6]);
 int Hex_grid(double x, double y,int Cx[2*Nx][Ny][2],int Cy[2*Nx][Ny][2]);
 void init ( double * x, double * y, double * xw, double * yw,double * xold, double * yold, int L ,double g[Ny*Nx],int n[Np][6],int P[Nx*Ny][6],int Cx[2*Nx][Ny][2],int Cy[2*Nx][Ny][2]);
 void init_conf( double * x, double * y, double * xw, double * yw,double g[Ny*Nx],int n[Np][6],int P[Nx*Ny][6],int Cx[2*Nx][Ny][2],int Cy[2*Nx][Ny][2], double decay_rate,double deposit_rate);
-double Dynamics(double * x, double * y, double * xw, double * yw,double * xold,double * yold,int n[Np][6],double g[Ny*Nx], int P[Nx*Ny][6],int Cx[2*Nx][Ny][2],int Cy[2*Nx][Ny][2],double C_dirx[6],double C_diry[6],double persistence,double deposit_rate,double decay_rate,double stddev,double dr,double rc2);
+double Dynamics(double * x, double * y, double * xw, double * yw,double * xold,double * yold,int n[Np][6],double g[Ny*Nx], int P[Nx*Ny][6],int Cx[2*Nx][Ny][2],int Cy[2*Nx][Ny][2],double C_dirx[6],double C_diry[6],double deposit_rate,double decay_rate,double stddev,double dr,double rc2);
 double total_e ( double * rx, double * ry, int i, int L, double rc2,int Ns[Np],int Nid[Np][Np]); 
 void verlet_list(double * rx, double * ry, int L, double rs,int Ns[Np],int Nid[Np][Np]);
 int clustering(double *x,double *y, int time, double deposit_rate, double decay_rate);
@@ -30,8 +30,7 @@ int Ns[Np], Nid[Np][Np]={}; double rs=8;
 int T,i,j,t,ts;//T=Total time
 int P[Nx*Ny][6], Cx[2*Nx][Ny][2],Cy[2*Nx][Ny][2],n[Np][6]; double C_dirx[6], C_diry[6];
 double * x, * y,* xw, * yw,* xold, * yold;
-double deposit_rate,decay_rate,persistence,stddev,rc2,dr,incr;
-//Initialize with 0 chemicals 
+double deposit_rate,decay_rate,stddev,rc2,dr,incr; 
 double g[Ny*Nx] = {},G; 
 
 int main(){
@@ -47,8 +46,9 @@ int main(){
 	xold = (double*)malloc(Np*sizeof(double));  yold = (double*)malloc(Np*sizeof(double));
 
 	//Parameters
-	deposit_rate=5.00; decay_rate=0.01;
-	incr=0.05; persistence=0.00; stddev= pi/4.0; rc2=pow(2.0,1.0/6.0); dr=1.0; ts =(int)(1.0/decay_rate); T= 100000;
+	deposit_rate=5.00; decay_rate=0.01; // The controlling parameters dicussed in the article, deposition rate and decay rate can be changed here.
+//Initialize with 0 chemicals 
+	incr=0.05;  stddev= pi/4.0; rc2=pow(2.0,1.0/6.0); dr=1.0; ts =(int)(1.0/decay_rate); T= 100000;
 
 	char filename[50]; 
 	FILE *fw, *fwc; 
@@ -64,7 +64,7 @@ int main(){
 	for(t=0;t<T+1;t++){//t is time
 		printf("time = %d\tdeposit= %2.4f\tdecay= %2.4f\t Np= %d\n",t,deposit_rate,decay_rate,Np );
 		//Montecarlo step at time t
-		Dynamics(x,y,xw,yw,xold,yold,n,g,P,Cx,Cy,C_dirx,C_diry,persistence,deposit_rate,decay_rate,stddev,dr,rc2);
+		Dynamics(x,y,xw,yw,xold,yold,n,g,P,Cx,Cy,C_dirx,C_diry,deposit_rate,decay_rate,stddev,dr,rc2);
 		
 		//Stochastic decay of chemical
 		decay(decay_rate,g,G);
@@ -211,7 +211,7 @@ void init_conf( double * x, double * y, double * xw, double * yw,double g[Ny*Nx]
 
 
 //Particles movement
-double Dynamics(double * x, double * y, double * xw, double * yw,double * xold,double * yold,int n[Np][6],double g[Ny*Nx],int P[Nx*Ny][6],int Cx[2*Nx][Ny][2],int Cy[2*Nx][Ny][2],double C_dirx[6],double C_diry[6],double persistence,double deposit_rate,double decay_rate,double stddev,double dr,double rc2){
+double Dynamics(double * x, double * y, double * xw, double * yw,double * xold,double * yold,int n[Np][6],double g[Ny*Nx],int P[Nx*Ny][6],int Cx[2*Nx][Ny][2],int Cy[2*Nx][Ny][2],double C_dirx[6],double C_diry[6],double deposit_rate,double decay_rate,double stddev,double dr,double rc2){
 	int i,j,k,ij;
 	double dx,dy,E_old,E_new,xo,yo,xow,yow,xdrn=0,ydrn=0,theta,theta0,temp=1.0,r=1.0; char boundary[]="PBC"; int res = strcmp(boundary,"PBC");
 	double avgdx=0,avgdy=0;
@@ -223,8 +223,8 @@ double Dynamics(double * x, double * y, double * xw, double * yw,double * xold,d
 		xo = x[i];	yo = y[i];	xow = xw[i];	yow = yw[i];
 
 		//printf("x %lf %lf \n",x[i],y[i]);
-		xdrn = 0.001*(drand48()-0.5) +persistence*(x[i] - xold[i]); 
-		ydrn = 0.001*(drand48()-0.5) +persistence*(y[i] - yold[i]);	 	
+		xdrn = 0.001*(drand48()-0.5) ; 
+		ydrn = 0.001*(drand48()-0.5) ;	 	
 		for(k=0; k<6; k++){
 			xdrn += Pr(deposit_rate*g[n[i][k]])*C_dirx[k]; ydrn += Pr(deposit_rate*g[n[i][k]])*C_diry[k];
 			//printf("k %d n %d g %d\n",k,n[i][k],g[n[i][k]]);
