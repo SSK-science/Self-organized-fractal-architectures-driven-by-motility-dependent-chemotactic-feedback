@@ -1,7 +1,6 @@
 # Self-organized fractal architectures driven by motility-dependent chemotactic feedback
 
-This repository contains the code and data needed to reproduce the particle and chemical configurations reported in the accompanying article. The file `Fig1-4.xlsx` stores the exact numerical data used to produce the plots shown in the main text.
-
+This repository contains the code and data needed to reproduce the particle and chemical configurations reported in the "Self-organized fractal architectures driven by motility-dependent chemotactic feedback" article.
 ## Overview
 
 The project studies self-organization patterns including fractal-like structures arising from motility-dependent chemotactic feedback in an agent based model. The code in this repository implements the simulation and clustering analysis. This produces the time series data of the particle and chemical configurations. This further is used for quantitative analysis.  
