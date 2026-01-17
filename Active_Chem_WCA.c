@@ -4,11 +4,11 @@
 #include<string.h>
 #include<time.h>
 
-#define Nx 100
-#define Ny 100
-#define Np 1500
+#define Nx 100  //Chemical grid in x 
+#define Ny 100	//Chemical grid in y
+#define Np 1500		//Total # of particles
 #define pi 3.14159265359
-#define ux 0.5
+#define ux 0.5 
 #define uy 0.86602540378
 
 void Chem_neighbours(int P[Nx*Ny][6]);
@@ -27,7 +27,7 @@ void decay(double decay_rate,double g[Ny*Nx],int G);
 double PBC(double x,double L);
 
 int Ns[Np], Nid[Np][Np]={}; double rs=8;
-int T,i,j,t,ts;//T=Total time,Nx,Ny are the lattice boundaries for chemical,Np is the number of particles
+int T,i,j,t,ts;//T=Total time
 int P[Nx*Ny][6], Cx[2*Nx][Ny][2],Cy[2*Nx][Ny][2],n[Np][6]; double C_dirx[6], C_diry[6];
 double * x, * y,* xw, * yw,* xold, * yold;
 double deposit_rate,decay_rate,persistence,stddev,rc2,dr,incr;
