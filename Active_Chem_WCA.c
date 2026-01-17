@@ -34,7 +34,7 @@ double deposit_rate,decay_rate,persistence,stddev,rc2,dr,incr;
 //Initialize with 0 chemicals 
 double g[Ny*Nx] = {},G; 
 
-int main(int argc, char *argv[]){
+int main(){
 	
 	srand48(time(0));
 	//defining chemical neighbouring sites
@@ -47,7 +47,7 @@ int main(int argc, char *argv[]){
 	xold = (double*)malloc(Np*sizeof(double));  yold = (double*)malloc(Np*sizeof(double));
 
 	//Parameters
-	deposit_rate=5.00; decay_rate=atof(argv[1]);
+	deposit_rate=5.00; decay_rate=0.01;
 	incr=0.05; persistence=0.00; stddev= pi/4.0; rc2=pow(2.0,1.0/6.0); dr=1.0; ts =(int)(1.0/decay_rate); T= 100000;
 
 	char filename[50]; 
