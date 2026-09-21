@@ -31,4 +31,14 @@ For questions about the code or reproducing figures, contact the repository owne
 - Or open an issue in this repository.
 
 ## Cite
-Please cite  our work ["Self-organized fractal architectures driven by motility-dependent chemotactic feedback"](https://doi.org/10.48550/arXiv.2504.16539) if you use our code or the data provided in this repository.
+If you use this code in your research, please cite:
+
+**Khuntia, S. S., Chaudhuri, D., & Chaudhuri, A. (2025).**
+*Self-organized fractal architectures driven by motility-dependent chemotactic feedback.*
+arXiv:2504.16539.
+https://doi.org/10.48550/arXiv.2504.16539
+
+The specific version of the simulation code and data associated with this work
+is archived on Zenodo:
+
+https://doi.org/10.5281/zenodo.22869440
