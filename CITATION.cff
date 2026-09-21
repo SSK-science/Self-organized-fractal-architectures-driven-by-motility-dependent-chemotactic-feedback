@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the associated article."
+title: "Self-organised fractal architectures driven by motility-dependent chemotactic feedback"
+
+authors:
+  - family-names: "Khuntia"
+    given-names: "Subhashree Subhrasmita"
+  - family-names: "Chaudhuri"
+    given-names: "Debasish"
+  - family-names: "Chaudhuri"
+    given-names: "Abhishek"
+
+preferred-citation:
+  type: article
+  title: "Self-organized fractal architectures driven by motility-dependent chemotactic feedback"
+  authors:
+    - family-names: "Khuntia"
+      given-names: "Subhashree Subhrasmita"
+    - family-names: "Chaudhuri"
+      given-names: "Debasish"
+    - family-names: "Chaudhuri"
+      given-names: "Abhishek"
+  year: 2025
+  doi: "10.48550/arXiv.2504.16539"
