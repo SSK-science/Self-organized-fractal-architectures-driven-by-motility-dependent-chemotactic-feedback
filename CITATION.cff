@@ -1,6 +1,6 @@
 cff-version: 1.2.0
-message: "If you use this software, please cite the associated article."
-title: "Self-organised fractal architectures driven by motility-dependent chemotactic feedback"
+message: "If you use this software in academic work, please cite the associated paper and the archived software version."
+title: "Simulation code for Self-organized fractal architectures driven by motility-dependent chemotactic feedback"
 
 authors:
   - family-names: "Khuntia"
@@ -9,6 +9,10 @@ authors:
     given-names: "Debasish"
   - family-names: "Chaudhuri"
     given-names: "Abhishek"
+
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.22869440"
 
 preferred-citation:
   type: article
