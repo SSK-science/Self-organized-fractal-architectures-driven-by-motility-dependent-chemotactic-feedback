@@ -21,7 +21,8 @@ Build and run (suggested)
 - Compile (example):
   - gcc -o active_chem_WCA Active_Chem_WCA.c -lm
 - Run (example):
-  - ./active_chem_WCA  
+  - ./active_chem_WCA
+    
 - `README.md` — This file.
 
 ## Contact
